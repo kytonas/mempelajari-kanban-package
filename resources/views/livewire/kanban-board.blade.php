@@ -6,7 +6,7 @@
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-12 mt-4">
         Add Task
     </a>
-     @if (session()->has('message'))
+    @if (session()->has('message'))
         <div class="mb-4 text-sm text-green-600 bg-green-100 rounded-lg p-4 ml-12 mr-12 mt-4" role="alert">
             {{ session('message') }}
         </div>
@@ -23,8 +23,7 @@
                             <span class="space-x-4 space-y-4 flex mb-4">{{ $task->title }}</span>
                             <a href="{{ route('editkanban', $task->id) }}"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">EDIT</a>
-                            <button wire:click="destroy({{ $task->id }})"
-                                onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')"
+                            <button onclick="confirmDelete({{ $task->id }})"
                                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">DELETE</button>
                         </div>
                     @endforeach
@@ -47,5 +46,11 @@
         ev.preventDefault();
         var taskId = ev.dataTransfer.getData("taskId");
         @this.updateTaskStatus(taskId, newStatus);
+    }
+
+    function confirmDelete(taskId) {
+        if (confirm('Apakah anda yakin ingin menghapus data ini?')) {
+            @this.call('destroy', taskId);
+        }
     }
 </script>
