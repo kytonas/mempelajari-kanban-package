@@ -22,6 +22,11 @@
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">EDIT</a>
                             <button onclick="confirmDelete({{ $task->id }})"
                                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">DELETE</button>
+                            <small>
+                                <p class="text-sm text-gray-400 mt-2">
+                                    <i>Update at : {{ $task->updated_at->format('H:i') }}</i>
+                                </p>
+                            </small>
                         </div>
                     @endforeach
                 </div>
