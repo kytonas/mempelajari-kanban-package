@@ -3,7 +3,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Task;
+use Livewire\Attributes\Title;
 
+
+#[Title('Kanban Board')]
 class KanbanBoard extends Component
 {
     public $tasks;

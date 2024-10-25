@@ -43,6 +43,7 @@ class EditKanban extends Component
     }
     public function render()
     {
-        return view('livewire.edit-kanban');
+        return view('livewire.edit-kanban')
+            ->title('Edit Kanban');
     }
 }
