@@ -24,7 +24,7 @@
                                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">DELETE</button>
                             <small>
                                 <p class="text-sm text-gray-400 mt-2">
-                                    <i>Update at : {{ $task->updated_at->format('H:i') }}</i>
+                                    <i>{{ $task->updated_at->format('H:i') }}</i>
                                 </p>
                             </small>
                         </div>
