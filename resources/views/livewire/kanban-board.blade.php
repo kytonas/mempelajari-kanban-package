@@ -1,19 +1,37 @@
 <div>
-    <h1 class="mt-4 ml-12"><b>Kanban Board by Laravel Livewire</b></h1>
-<div class="flex space-x-4 ml-12 mr-12 rounded">
-    @foreach (['Queue', 'In Progress', 'Completed'] as $status)
-        <div class="w-1/3 bg-black text-white p-4 rounded">
-            <h2 class="font-bold mb-2">{{ $status }}</h2>
-            <div class="space-y-2 bg-black" ondrop="drop(event, '{{ $status }}')" ondragover="allowDrop(event)">
-                @foreach ($tasks->where('status', $status) as $task)
-                    <div class="bg-gray-800 p-2 rounded shadow" draggable="true" ondragstart="drag(event, {{ $task->id }})">
-                        {{ $task->title }}
-                    </div>
-                @endforeach
-            </div>
+    <h1 class="mt-4 ml-12 mb-4 text-3xl font-bold text-gray-900">
+        Kanban Board by Laravel Livewire
+    </h1>
+    <a href="{{ route('createkanban') }}"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-12 mt-4">
+        Add Task
+    </a>
+     @if (session()->has('message'))
+        <div class="mb-4 text-sm text-green-600 bg-green-100 rounded-lg p-4 ml-12 mr-12 mt-4" role="alert">
+            {{ session('message') }}
         </div>
-    @endforeach
-</div>
+    @endif
+    <div class="flex space-x-4 ml-12 mr-12 mt-4">
+        @foreach (['Queue', 'In Progress', 'Completed'] as $status)
+            <div class="w-1/3 bg-black text-white p-4 rounded" ondrop="drop(event, '{{ $status }}')"
+                ondragover="allowDrop(event)">
+                <h2 class="font-bold mb-2">{{ $status }}</h2>
+                <div class="space-y-2 bg-black">
+                    @foreach ($tasks->where('status', $status) as $task)
+                        <div class="bg-gray-800 p-2 rounded shadow-lg justify-between items-center" draggable="true"
+                            ondragstart="drag(event, {{ $task->id }})">
+                            <span class="space-x-4 space-y-4 flex mb-4">{{ $task->title }}</span>
+                            <a href="{{ route('editkanban', $task->id) }}"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">EDIT</a>
+                            <button wire:click="destroy({{ $task->id }})"
+                                onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')"
+                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">DELETE</button>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endforeach
+    </div>
 </div>
 
 <script>
