@@ -2,10 +2,7 @@
     <h1 class="mt-4 ml-12 mb-4 text-3xl font-bold text-gray-900">
         Kanban Board by Laravel Livewire
     </h1>
-    <a href="{{ route('createkanban') }}"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-12 mt-4">
-        Add Task
-    </a>
+    @livewire('create-kanban')
     @if (session()->has('message'))
         <div class="mb-4 text-sm text-green-600 bg-green-100 rounded-lg p-4 ml-12 mr-12 mt-4" role="alert">
             {{ session('message') }}
